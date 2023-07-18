@@ -4,12 +4,12 @@ import Input from './Input'
 const Heading = () => {
     // sections for input in the resume 
     const sections={
-        summary: "Summary",
+        basic: "Basic Info",
         workExp: "Work Experience",
-        project: "Projects",
         edu: "Education",
-        certi: "Certifications",
+        project: "Projects",
         skills: "Skills",
+        certi: "Certifications",
         other: "Other"
     };
 
