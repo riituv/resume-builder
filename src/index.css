@@ -10,3 +10,7 @@
         font-family: 'Raleway', sans-serif;
     }
 }
+
+.fixed-height-700 {
+    height: 850px;
+  }

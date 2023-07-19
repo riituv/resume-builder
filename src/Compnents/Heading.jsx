@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import Input from './Input'
 
 const Heading = () => {
@@ -12,6 +12,45 @@ const Heading = () => {
         certi: "Certifications",
         other: "Other"
     };
+
+    // all resume information
+    const[resumeInfo, setResumeInfo]=useState({
+        [sections.basic]:{
+            id:sections.basic,
+            secTitle: sections.basic,
+            details:{},
+        },
+        [sections.workExp]:{
+            id:sections.workExp,
+            secTitle: sections.workExp,
+            details:[],
+        },
+        [sections.edu]:{
+            id:sections.edu,
+            secTitle: sections.edu,
+            details:[],
+        },
+        [sections.project]:{
+            id:sections.project,
+            secTitle: sections.project,
+            details:[],
+        },
+        [sections.skills]:{
+            id:sections.skills,
+            secTitle: sections.skills,
+            points:[],
+        },
+        [sections.certi]:{
+            id:sections.certi,
+            secTitle: sections.certi,
+            details:[],
+        },
+        [sections.other]:{
+            id:sections.other,
+            secTitle: sections.other,
+            details:"",
+        }
+    });
 
     return (
         <div className='flex flex-col mt-8 w-full 
@@ -29,7 +68,7 @@ const Heading = () => {
                 </div>
                 
             </div>
-            <Input sections={sections}/>
+            <Input sections={sections} information={resumeInfo}/>
         </div>
     )
 }
