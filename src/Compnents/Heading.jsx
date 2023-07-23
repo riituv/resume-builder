@@ -1,6 +1,6 @@
-import React,{useState} from 'react'
+import React,{useEffect, useState} from 'react'
 import Input from './Input'
-
+import {BiSolidDownload} from 'react-icons/bi'
 const Heading = () => {
     // sections for input in the resume 
     const sections={
@@ -48,10 +48,14 @@ const Heading = () => {
         [sections.other]:{
             id:sections.other,
             secTitle: sections.other,
-            details:"",
+            details:[],
         }
     });
 
+    useEffect(() => {
+      console.log(resumeInfo);
+    }, [resumeInfo]);
+    
     return (
         <div className='flex flex-col mt-8 w-full 
         md:mt-10 p-4 mx-auto md:p-10 '>
@@ -62,13 +66,15 @@ const Heading = () => {
                 </div>
 
                 <div className='justify-center md:justify-end w-full flex '>
-                    <a download={true} className='bg-cyan-200 border p-2 border-gray-800 
-            rounded-md h-10 w-30 font-bold cursor-pointer hover:scale-105 duration-200'>
-                        Download</a>
+                    <a download={true} className='bg-cyan-400 border p-2 border-gray-800 
+                    rounded-lg h-10 w-30 font-bold cursor-pointer hover:scale-105 duration-200 
+                    flex flex-row gap-2' href="">
+                        Download <BiSolidDownload size={20}/></a>
                 </div>
                 
             </div>
-            <Input sections={sections} information={resumeInfo}/>
+            <Input sections={sections} information={resumeInfo}
+            setInformation={setResumeInfo}/>
         </div>
     )
 }

@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import Control from './ipControl'
 import { useEffect } from 'react';
 
-
 const Input = (props) => {
   const sections = props.sections;
   const information = props.information;
@@ -23,8 +22,10 @@ const Input = (props) => {
     githubLink: activeInfo?.details?.github || "",
     title: activeInfo?.details?.title || "",
     summary: activeInfo?.details?.summary || "",
+    points: activeInfo?.details?.points || [] 
   });
-
+  const [activeDetails, setActiveDetails]=useState(0);
+  //initially 0th index rahega
 
   const handlePointUpdate = (value, index) => {
     const tempValues = { ...values };
@@ -38,24 +39,24 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2  gap-6'>
         <Control label="Title"
           placeholder="Enter title ed. Frontend developer"
-          defaultValue={values.title}
+          value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))} />
         <Control label="Company Name"
           placeholder="Enter company name eg. Amazon"
-          defaultValue={values.companyName}
+          value={values.companyName}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, companyName: event.target.value }))} />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Certificate Link"
           placeholder="Enter certificate link"
-          defaultValue={values.certificationLink}
+          value={values.certificationLink}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, certificationLink: event.target.value }))} />
         <Control label="Location"
           placeholder="Enter location eg. Remote"
-          defaultValue={values.location}
+          value={values.location}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, location: event.target.value }))} />
       </div>
@@ -63,26 +64,26 @@ const Input = (props) => {
         <Control label="Start Date"
           type="date"
           placeholder="Enter start date of work"
-          defaultValue={values.startDate}
+          value={values.startDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, startDate: event.target.value }))} />
         <Control label="End Date"
           type="date"
           placeholder="Enter last date of work"
-          defaultValue={values.endDate}
+          value={values.endDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, endDate: event.target.value }))} />
       </div>
       <div className='grid grid-cols-1 gap-4'>
         <label className='text-xl font-semibold mt-4'>Enter work description</label>
         <Control placeholder="Line 1"
-          defaultValue={values.points ? values.points[0] : ""}
+          value={values.points ? values.points[0] : ""}
           onChange={(event) => handlePointUpdate(event.target.value, 0)} />
         <Control placeholder="Line 2"
-          defaultValue={values.points ? values.points[1] : ""}
+          value={values.points ? values.points[1] : ""}
           onChange={(event) => handlePointUpdate(event.target.value, 1)} />
         <Control placeholder="Line 3"
-          defaultValue={values.points ? values.points[2] : ""}
+          value={values.points ? values.points[2] : ""}
           onChange={(event) => handlePointUpdate(event.target.value, 2)} />
       </div>
     </div>
@@ -94,14 +95,14 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Title"
           placeholder="Enter title ed. Chat Application"
-          defaultValue={values.title}
+          value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))} />
       </div>
 
       <Control label="Overview"
         placeholder="Enter basic overview of the project"
-        defaultValue={values.overview}
+        value={values.overview}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, overview: event.target.value }))}
       />
@@ -109,12 +110,12 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Deployed Link"
           placeholder="Enter deployed link of project"
-          defaultValue={values.deployedLink}
+          value={values.deployedLink}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, deployedLink: event.target.value }))} />
         <Control label="Github Link"
           placeholder="Enter github link of project"
-          defaultValue={values.githubLink}
+          value={values.githubLink}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, githubLink: event.target.value }))} />
       </div>
@@ -122,13 +123,13 @@ const Input = (props) => {
       <div className='grid grid-cols-1 gap-4'>
         <label className='text-xl font-semibold mt-4'>Enter project description</label>
         <Control placeholder="Line 1"
-          defaultValue={values.points ? values.points[0] : ""}
+          value={values.points ? values.points[0] : ""}
           onChange={(event) => handlePointUpdate(event.target.value, 0)} />
         <Control placeholder="Line 2"
-          defaultValue={values.points ? values.points[1] : ""}
+          value={values.points ? values.points[1] : ""}
           onChange={(event) => handlePointUpdate(event.target.value, 1)} />
         <Control placeholder="Line 3"
-          defaultValue={values.points ? values.points[2] : ""}
+          value={values.points ? values.points[2] : ""}
           onChange={(event) => handlePointUpdate(event.target.value, 2)} />
       </div>
 
@@ -140,13 +141,13 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Title"
           placeholder="Enter title ed. B. Tech"
-          defaultValue={values.title}
+          value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))} />
       </div>
       <Control label="College/School Name"
         placeholder="Enter name of school/college"
-        defaultValue={values.college}
+        value={values.college}
         onChange={(event) =>
           setValues((prev) => ({ ...prev, college: event.target.value }))}
       />
@@ -154,13 +155,13 @@ const Input = (props) => {
         <Control label="Start Date"
           type="date"
           placeholder="Enter start date of education"
-          defaultValue={values.startDate}
+          value={values.startDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, startDate: event.target.value }))} />
         <Control label="End Date"
           type="date"
           placeholder="Enter last date of education"
-          defaultValue={values.endDate}
+          value={values.endDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, endDate: event.target.value }))} />
       </div>
@@ -172,36 +173,36 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Name"
           placeholder="Enter your full name eg. John Doe"
-          defaultValue={values.name}
+          value={values.name}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, name: event.target.value }))} />
         <Control label="Title"
           placeholder="Enter title eg. Frontend developer"
-          defaultValue={values.title}
+          value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))} />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="LinkedIn Link"
           placeholder="Enter your Linkedin profile link"
-          defaultValue={values.linkedinLink}
+          value={values.linkedinLink}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, linkedinLink: event.target.value }))} />
         <Control label="Github Link"
           placeholder="Enter your GitHub profile link"
-          defaultValue={values.githubLink}
+          value={values.githubLink}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, githubLink: event.target.value }))} />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Email"
           placeholder="Enter your email"
-          defaultValue={values.email}
+          value={values.email}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, email: event.target.value }))} />
         <Control label="phone"
           placeholder="Enter your phone number"
-          defaultValue={values.phone}
+          value={values.phone}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, phone: event.target.value }))} />
       </div>
@@ -209,7 +210,7 @@ const Input = (props) => {
         <Control
           label="Summary"
           placeholder="Enter summary"
-          defaultValue={values.summary}
+          value={values.summary}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, summary: event.target.value }))} />
       </div>
@@ -219,13 +220,13 @@ const Input = (props) => {
   const others = (
     <div className='grid grid-cols-1 gap-4'>
       <Control placeholder="Line 1"
-        defaultValue={values.points ? values.points[0] : ""}
+        value={values.points ? values.points[0] : ""}
         onChange={(event) => handlePointUpdate(event.target.value, 0)} />
       <Control placeholder="Line 2"
-        defaultValue={values.points ? values.points[1] : ""}
+        value={values.points ? values.points[1] : ""}
         onChange={(event) => handlePointUpdate(event.target.value, 1)} />
       <Control placeholder="Line 3"
-        defaultValue={values.points ? values.points[2] : ""}
+        value={values.points ? values.points[2] : ""}
         onChange={(event) => handlePointUpdate(event.target.value, 2)} />
     </div>
   );
@@ -235,9 +236,9 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Skill"
           placeholder="Enter skill"
-          defaultValue={values.skills}
+          value={values.skill}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, skills: event.target.value }))} />
+            setValues((prev) => ({ ...prev, skill: event.target.value }))} />
       </div>
     </div>
   );
@@ -247,12 +248,12 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Title"
           placeholder="Enter title ed. Azure Fundamentals"
-          defaultValue={values.title}
+          value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))} />
         <Control label="Issuing Organization"
           placeholder="Enter name issuing organization"
-          defaultValue={values.issuingOrganization}
+          value={values.issuingOrganization}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, issuingOrganization: event.target.value }))}
         />
@@ -261,20 +262,20 @@ const Input = (props) => {
         <Control label="Issue Date"
           type="date"
           placeholder="Enter issue date of certificate"
-          defaultValue={values.issueDate}
+          value={values.issueDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, issueDate: event.target.value }))} />
         <Control label="Expiration Date"
           type="date"
           placeholder="Enter expiration date of certificate"
-          defaultValue={values.expirationDate}
+          value={values.expirationDate}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, expirationDate: event.target.value }))} />
       </div>
       <div className='grid grid-cols-1 gap-6'>
         <Control label="Credential URL"
           placeholder="Enter credential url of certification"
-          defaultValue={values.certificationLink}
+          value={values.certificationLink}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, certificationLink: event.target.value }))} />
       </div>
@@ -314,37 +315,234 @@ const Input = (props) => {
     const activeInfo = information[sections[activeSec]];
     setActiveInfo(activeInfo);
     setSecTitle(sections[activeSec]);
+    setActiveDetails(0);
     setValues({
       name: activeInfo?.details?.name || "",
-      overview: activeInfo?.details ? activeInfo?.details[0]?.overview || "" : "",
-      link: activeInfo?.details ? activeInfo?.details[0]?.link || "" : "",
-      certificationLink: activeInfo?.details ? activeInfo?.details[0]?.certificationLink || "" : "",
-      deployedLink: activeInfo?.details ? activeInfo?.details[0]?.deployedLink || "" : "",
+      email: activeInfo?.details?.email || "",
+      phone: activeInfo?.details?.phone || "",
+      linkedinLink: activeInfo?.details?.linkedin || "",
+      githubLink: activeInfo?.details
+        ? activeInfo?.details[0]?.githubLink || ""
+        : activeInfo?.details?.githubLink || "",
+      title: activeInfo?.details
+        ? activeInfo?.details[0]?.title || ""
+        : activeInfo?.details?.title || "",
+      summary: activeInfo?.details?.summary || "",
+
+      companyName: activeInfo?.details ? activeInfo?.details[0]?.companyName || "" : "",
       startDate: activeInfo?.details ? activeInfo?.details[0]?.startDate || "" : "",
       endDate: activeInfo?.details ? activeInfo?.details[0]?.endDate || "" : "",
+      certificationLink: activeInfo?.details ? activeInfo?.details[0]?.certificationLink || "" : "",
+      location: activeInfo?.details ? activeInfo?.details[0]?.location || "" : "",
+
+      college: activeInfo?.details ? activeInfo?.details[0]?.college || "" : "",
+
+      overview: activeInfo?.details ? activeInfo?.details[0]?.overview || "" : "",
+      deployedLink: activeInfo?.details ? activeInfo?.details[0]?.deployedLink || "" : "",
+      
+      skill: activeInfo?.details ? activeInfo?.details[0]?.skill || "" : "",
+
+      issuingOrg: activeInfo?.details ? activeInfo?.details[0]?.issuingOrg || "" : "",
+
       points: activeInfo?.details
         ? activeInfo?.details[0]?.points
           ? [...activeInfo?.details[0]?.points] : ""
         : activeInfo?.points
           ? [...activeInfo.points]
-          : "",
-      email: activeInfo?.details?.email || "",
-      phone: activeInfo?.details?.phone || "",
-      linkedinLink: activeInfo?.details?.linkedin || "",
-      githubLink: activeInfo?.details
-      ? activeInfo?.details[0]?.githubLink || ""
-      : activeInfo?.details?.githubLink || "",
-      title: activeInfo?.details
-        ? activeInfo?.details[0]?.title || ""
-        : activeInfo?.details?.title || "",
-      summary: activeInfo?.details?.summary || "",
+          : "", 
     });
-  }, [activeSec])
+  }, [activeSec]);
 
 
   const handleSubmission = () => {
-    console.log(values);
+    switch (sections[activeSec]) {
+
+      case sections.basic:
+        {
+          const tempDetails = {
+            name: values.name,
+            title: values.title,
+            linkedinLink: values.linkedinLink,
+            githubLink: values.githubLink,
+            email: values.email,
+            phone: values.phone,
+            summary: values.summary
+          }
+
+          props.setInformation(prev => ({
+            ...prev, [sections.basic]
+              : {
+                ...prev[sections.basic],
+              details: tempDetails,
+              secTitle,
+            }
+          }));
+
+          break;
+        }
+
+      case sections.workExp:
+        {
+          const tempDetails = {
+            certificationLink: values.certificationLink,
+            title: values.title,
+            startDate: values.startDate,
+            endDate: values.endDate,
+            companyName: values.companyName,
+            location: values.location,
+            points: values.points
+          }
+
+          const tempDetail=[...information[sections.workExp]?.details];
+          tempDetail[activeDetails]=tempDetails;
+
+          props.setInformation(prev => ({
+            ...prev, [sections.workExp]
+              : {
+                ...prev[sections.workExp],
+              details: tempDetail,
+              secTitle,
+            }
+          }));
+
+          break;
+        }
+
+        case sections.edu:
+        {
+          const tempDetails = {
+            college: values.college,
+            title: values.title,
+            startDate: values.startDate,
+            endDate: values.endDate,
+          }
+
+          const tempDetail=[...information[sections.edu]?.details];
+          tempDetail[activeDetails]=tempDetails;
+
+          props.setInformation(prev => ({
+            ...prev, [sections.edu]
+              : {
+                ...prev[sections.edu],
+              details: tempDetail,
+              secTitle,
+            }
+          }));
+
+          break;
+        }
+
+        case sections.project:
+        {
+          const tempDetails = {
+            overview: values.overview,
+            title: values.title,
+            deployedLink: values.deployedLink,
+            githubLink: values.githubLink,
+            points: values.points,
+          }
+
+          const tempDetail=[...information[sections.project]?.details];
+          tempDetail[activeDetails]=tempDetails;
+
+          props.setInformation(prev => ({
+            ...prev, [sections.project]
+              : {
+                ...prev[sections.project],
+              details: tempDetail,
+              secTitle,
+            }
+          }));
+
+          break;
+        }
+
+        case sections.skills:
+        {
+          const tempDetails = {
+            skill: values.skill,
+          }
+
+          const tempDetail=[...information[sections.skills]?.details];
+          tempDetail[activeDetails]=tempDetails;
+
+          props.setInformation(prev => ({
+            ...prev, [sections.skills]
+              : {
+                ...prev[sections.skills],
+              details: tempDetail,
+              secTitle,
+            }
+          }));
+
+          break;
+        }
+
+        case sections.certi:
+        {
+          const tempDetails = {
+            certificationLink: values.certificationLink,
+            title: values.title,
+            startDate: values.startDate,
+            endDate: values.endDate,
+            issuingOrg:values.issuingOrg,
+            
+          }
+
+          const tempDetail=[...information[sections.certi]?.details];
+          tempDetail[activeDetails]=tempDetails;
+
+          props.setInformation(prev => ({
+            ...prev, [sections.certi]
+              : {
+                ...prev[sections.certi],
+              details: tempDetail,
+              secTitle,
+            }
+          }));
+
+          break;
+        }
+
+        case sections.other:
+        {
+          const tempDetails = {
+            points: values.points,
+          }
+
+          props.setInformation(prev => ({
+            ...prev, [sections.other]
+              : {
+                ...prev[sections.other],
+              details: tempDetails,
+              secTitle,
+            }
+          }));
+
+          break;
+        }
+
+    }
   };
+
+  const handleAddNew=()=>{
+    const details=activeInfo?.details;
+    if (!details) return;
+    const lastDetail=details.slice(-1)
+    details.push({});
+
+    props.setInformation(prev=>({...prev, [sections[activeSec]]
+      :{...information[sections[activeSec]],
+        details:details,
+      },
+    }));
+    setActiveDetails(details?.length);
+  };
+
+  useEffect(() => {
+    setActiveInfo(information[sections[activeSec]]);
+  }, [information]);
+  
 
   return (
     <div className='flex flex-col pd-4 md:mx-auto shadow-md shadow-gray-300'>
@@ -368,22 +566,38 @@ const Input = (props) => {
           value={secTitle}
           onChange={(event) => setSecTitle(event.target.value)} />
 
-        <div className='flex flex-wrap gap-10'>
-          <div className='flex gap-5 items-center'>
+        
+          <div className='flex flex-wrap gap-5 items-center'>
             {
               activeInfo?.details && Array.isArray(activeInfo.details)
                 ? activeInfo?.details?.map((item, index) => (
-                  <p className='bg-cyan-300 text-gray-800 capitalize rounded-2xl p-2 text-lg'
-                    key={item.title + index}>{sections[activeSec]} {index + 1}
+                  <div className={`text-gray-800 capitalize rounded-2xl p-2 text-lg
+                  cursor-pointer font-semibold ${activeDetails===index ? 'bg-cyan-400' : ''}`}
+                    key={item.title + index}
+                    onClick={()=>setActiveDetails(index)}>
+                  <p >
+                    {sections[activeSec]} {index + 1} x
                   </p>
+                  </div>
                 ))
                 : ''
             }
-
+            {
+              activeInfo?.details && activeInfo?.details?.length>0 ?(
+                <div className='text-cyan-500 flex flex-wrap gap-10 
+                rounded-2xl p-2 text-lg cursor-pointer font-semibold'
+                onClick={handleAddNew}>+New</div>
+              ) : (
+                ""
+              )
+            }
+            
           </div>
-        </div>
+        
+
         {generateBody()}
 
+        {/*save button */}
         <div className='py-10 flex items-center justify-end w-full'>
           <button className='bg-cyan-300 border p-2 border-gray-800 w-20
         rounded-md h-10 font-bold cursor-pointer hover:scale-105 duration-200'
