@@ -351,7 +351,7 @@ const Input = (props) => {
           ? [...activeInfo.points]
           : "",
     });
-  }, [activeSec]);
+  }, [activeSec, information, sections]);
 
 
   const handleSubmission = () => {
@@ -560,7 +560,7 @@ const Input = (props) => {
 
   useEffect(() => {
     setActiveInfo(information[sections[activeSec]]);
-  }, [information]);
+  }, [information, activeSec, sections]);
 
   useEffect(() => {
     const activeInfo = information[sections[activeSec]];
@@ -582,7 +582,7 @@ const Input = (props) => {
       skill: activeInfo.details[activeDetails]?.skill || "",
       issuingOrg: activeInfo.details[activeDetails]?.issuingOrg || "",
     });
-  }, [activeDetails]);
+  }, [activeDetails, activeSec, information, sections]);
 
 
   return (
