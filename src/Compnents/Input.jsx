@@ -22,9 +22,9 @@ const Input = (props) => {
     githubLink: activeInfo?.details?.github || "",
     title: activeInfo?.details?.title || "",
     summary: activeInfo?.details?.summary || "",
-    points: activeInfo?.details?.points || [] 
+    points: activeInfo?.details?.points || []
   });
-  const [activeDetails, setActiveDetails]=useState(0);
+  const [activeDetails, setActiveDetails] = useState(0);
   //initially 0th index rahega
 
   const handlePointUpdate = (value, index) => {
@@ -253,24 +253,24 @@ const Input = (props) => {
             setValues((prev) => ({ ...prev, title: event.target.value }))} />
         <Control label="Issuing Organization"
           placeholder="Enter name issuing organization"
-          value={values.issuingOrganization}
+          value={values.issuingOrg}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, issuingOrganization: event.target.value }))}
+            setValues((prev) => ({ ...prev, issuingOrg: event.target.value }))}
         />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Issue Date"
           type="date"
           placeholder="Enter issue date of certificate"
-          value={values.issueDate}
+          value={values.startDate}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, issueDate: event.target.value }))} />
+            setValues((prev) => ({ ...prev, startDate: event.target.value }))} />
         <Control label="Expiration Date"
           type="date"
           placeholder="Enter expiration date of certificate"
-          value={values.expirationDate}
+          value={values.endDate}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, expirationDate: event.target.value }))} />
+            setValues((prev) => ({ ...prev, endDate: event.target.value }))} />
       </div>
       <div className='grid grid-cols-1 gap-6'>
         <Control label="Credential URL"
@@ -339,7 +339,7 @@ const Input = (props) => {
 
       overview: activeInfo?.details ? activeInfo?.details[0]?.overview || "" : "",
       deployedLink: activeInfo?.details ? activeInfo?.details[0]?.deployedLink || "" : "",
-      
+
       skill: activeInfo?.details ? activeInfo?.details[0]?.skill || "" : "",
 
       issuingOrg: activeInfo?.details ? activeInfo?.details[0]?.issuingOrg || "" : "",
@@ -349,7 +349,7 @@ const Input = (props) => {
           ? [...activeInfo?.details[0]?.points] : ""
         : activeInfo?.points
           ? [...activeInfo.points]
-          : "", 
+          : "",
     });
   }, [activeSec]);
 
@@ -372,7 +372,7 @@ const Input = (props) => {
           props.setInformation(prev => ({
             ...prev, [sections.basic]
               : {
-                ...prev[sections.basic],
+              ...prev[sections.basic],
               details: tempDetails,
               secTitle,
             }
@@ -393,13 +393,13 @@ const Input = (props) => {
             points: values.points
           }
 
-          const tempDetail=[...information[sections.workExp]?.details];
-          tempDetail[activeDetails]=tempDetails;
+          const tempDetail = [...information[sections.workExp]?.details];
+          tempDetail[activeDetails] = tempDetails;
 
           props.setInformation(prev => ({
             ...prev, [sections.workExp]
               : {
-                ...prev[sections.workExp],
+              ...prev[sections.workExp],
               details: tempDetail,
               secTitle,
             }
@@ -408,7 +408,7 @@ const Input = (props) => {
           break;
         }
 
-        case sections.edu:
+      case sections.edu:
         {
           const tempDetails = {
             college: values.college,
@@ -417,13 +417,13 @@ const Input = (props) => {
             endDate: values.endDate,
           }
 
-          const tempDetail=[...information[sections.edu]?.details];
-          tempDetail[activeDetails]=tempDetails;
+          const tempDetail = [...information[sections.edu]?.details];
+          tempDetail[activeDetails] = tempDetails;
 
           props.setInformation(prev => ({
             ...prev, [sections.edu]
               : {
-                ...prev[sections.edu],
+              ...prev[sections.edu],
               details: tempDetail,
               secTitle,
             }
@@ -432,7 +432,7 @@ const Input = (props) => {
           break;
         }
 
-        case sections.project:
+      case sections.project:
         {
           const tempDetails = {
             overview: values.overview,
@@ -442,13 +442,13 @@ const Input = (props) => {
             points: values.points,
           }
 
-          const tempDetail=[...information[sections.project]?.details];
-          tempDetail[activeDetails]=tempDetails;
+          const tempDetail = [...information[sections.project]?.details];
+          tempDetail[activeDetails] = tempDetails;
 
           props.setInformation(prev => ({
             ...prev, [sections.project]
               : {
-                ...prev[sections.project],
+              ...prev[sections.project],
               details: tempDetail,
               secTitle,
             }
@@ -457,19 +457,19 @@ const Input = (props) => {
           break;
         }
 
-        case sections.skills:
+      case sections.skills:
         {
           const tempDetails = {
             skill: values.skill,
           }
 
-          const tempDetail=[...information[sections.skills]?.details];
-          tempDetail[activeDetails]=tempDetails;
+          const tempDetail = [...information[sections.skills]?.details];
+          tempDetail[activeDetails] = tempDetails;
 
           props.setInformation(prev => ({
             ...prev, [sections.skills]
               : {
-                ...prev[sections.skills],
+              ...prev[sections.skills],
               details: tempDetail,
               secTitle,
             }
@@ -478,24 +478,24 @@ const Input = (props) => {
           break;
         }
 
-        case sections.certi:
+      case sections.certi:
         {
           const tempDetails = {
             certificationLink: values.certificationLink,
             title: values.title,
             startDate: values.startDate,
             endDate: values.endDate,
-            issuingOrg:values.issuingOrg,
-            
+            issuingOrg: values.issuingOrg,
+
           }
 
-          const tempDetail=[...information[sections.certi]?.details];
-          tempDetail[activeDetails]=tempDetails;
+          const tempDetail = [...information[sections.certi]?.details];
+          tempDetail[activeDetails] = tempDetails;
 
           props.setInformation(prev => ({
             ...prev, [sections.certi]
               : {
-                ...prev[sections.certi],
+              ...prev[sections.certi],
               details: tempDetail,
               secTitle,
             }
@@ -504,7 +504,7 @@ const Input = (props) => {
           break;
         }
 
-        case sections.other:
+      case sections.other:
         {
           const tempDetails = {
             points: values.points,
@@ -513,7 +513,7 @@ const Input = (props) => {
           props.setInformation(prev => ({
             ...prev, [sections.other]
               : {
-                ...prev[sections.other],
+              ...prev[sections.other],
               details: tempDetails,
               secTitle,
             }
@@ -521,31 +521,72 @@ const Input = (props) => {
 
           break;
         }
+      default:
+        break;
 
     }
   };
 
-  const handleAddNew=()=>{
-    const details=activeInfo?.details;
+  const handleAddNew = () => {
+    const details = activeInfo?.details;
     if (!details) return;
-    const lastDetail=details.slice(-1)
+    const lastDetail = details.slice(-1)[0];
+    if (!Object.keys(lastDetail).length) return;
     details.push({});
 
-    props.setInformation(prev=>({...prev, [sections[activeSec]]
-      :{...information[sections[activeSec]],
-        details:details,
+    props.setInformation(prev => ({
+      ...prev, [sections[activeSec]]
+        : {
+          ...information[sections[activeSec]],
+        details: details,
       },
     }));
-    setActiveDetails(details?.length);
+    setActiveDetails(details?.length - 1);
+  };
+
+  const handleDeleteDetail = (index) => {
+    const details = activeInfo?.details ? [...activeInfo?.details] : "";
+    if (!details) return;
+    details.splice(index, 1);
+    props.setInformation(prev => ({
+      ...prev, [sections[activeSec]]
+        : {
+          ...information[sections[activeSec]],
+        details: details,
+      },
+    }));
+    setActiveDetails((prev) => (prev === index ? 0 : prev - 1));
   };
 
   useEffect(() => {
     setActiveInfo(information[sections[activeSec]]);
   }, [information]);
-  
+
+  useEffect(() => {
+    const activeInfo = information[sections[activeSec]];
+    const details = activeInfo?.details;
+    if (!details) return;
+
+    setValues({
+      githubLink: activeInfo.details[activeDetails]?.github || "",
+      title: activeInfo.details[activeDetails]?.title || "",
+      points: activeInfo.details[activeDetails]?.points || [],
+      companyName: activeInfo.details[activeDetails]?.companyName || "",
+      startDate: activeInfo.details[activeDetails]?.startDate || "",
+      endDate: activeInfo.details[activeDetails]?.endDate || "",
+      certificationLink: activeInfo[activeDetails]?.details?.certificationLink || "",
+      location: activeInfo.details[activeDetails]?.location || "",
+      college: activeInfo.details[activeDetails]?.college || "",
+      overview: activeInfo.details[activeDetails]?.overview || "",
+      deployedLink: activeInfo.details[activeDetails]?.deployedLink || "",
+      skill: activeInfo.details[activeDetails]?.skill || "",
+      issuingOrg: activeInfo.details[activeDetails]?.issuingOrg || "",
+    });
+  }, [activeDetails]);
+
 
   return (
-    <div className='flex flex-col pd-4 md:mx-auto shadow-md shadow-gray-300'>
+    <div className='flex flex-col pd-4 md:mx-auto shadow-md shadow-gray-300 fixed-height-900 mb-10'>
 
       <div className='flex lg:gap-10 md:gap-4 gap-5 md:flex-row flex-col p-10 border-b-2
        border-gray-300 text-xl font-semibold md:mx-auto'>
@@ -560,40 +601,44 @@ const Input = (props) => {
           </div>))}
       </div>
 
-      <div className='p-10 flex flex-col gap-4 fixed-height-700'>
+      <div className='p-10 flex flex-col gap-4 md:fixed-height-900'>
 
         <Control label="Title" placeholder="Enter section title"
           value={secTitle}
           onChange={(event) => setSecTitle(event.target.value)} />
 
-        
-          <div className='flex flex-wrap gap-5 items-center'>
-            {
-              activeInfo?.details && Array.isArray(activeInfo.details)
-                ? activeInfo?.details?.map((item, index) => (
-                  <div className={`text-gray-800 capitalize rounded-2xl p-2 text-lg
-                  cursor-pointer font-semibold ${activeDetails===index ? 'bg-cyan-400' : ''}`}
-                    key={item.title + index}
-                    onClick={()=>setActiveDetails(index)}>
+
+        <div className='flex flex-wrap gap-5 items-center'>
+          {
+            activeInfo?.details && Array.isArray(activeInfo.details)
+              ? activeInfo?.details?.map((item, index) => (
+                <div className={`text-gray-800 capitalize rounded-2xl p-2 text-lg flex flex-row gap-2
+                  cursor-pointer font-semibold ${activeDetails === index ? 'bg-cyan-400' : ''}`}
+                  key={item.title + index}
+                  onClick={() => setActiveDetails(index)}>
                   <p >
-                    {sections[activeSec]} {index + 1} x
+                    {sections[activeSec]} {index + 1}
                   </p>
-                  </div>
-                ))
-                : ''
-            }
-            {
-              activeInfo?.details && activeInfo?.details?.length>0 ?(
-                <div className='text-cyan-500 flex flex-wrap gap-10 
+                  <p onClick={(event) => {
+                    event.stopPropagation();
+                    handleDeleteDetail(index);
+                  }}>x</p>
+                </div>
+              ))
+              : ''
+          }
+          {
+            activeInfo?.details && activeInfo?.details?.length > 0 ? (
+              <div className='text-cyan-500 flex flex-wrap gap-10 
                 rounded-2xl p-2 text-lg cursor-pointer font-semibold'
                 onClick={handleAddNew}>+New</div>
-              ) : (
-                ""
-              )
-            }
-            
-          </div>
-        
+            ) : (
+              ""
+            )
+          }
+
+        </div>
+
 
         {generateBody()}
 

@@ -11,6 +11,18 @@
     }
 }
 
-.fixed-height-700 {
+.fixed-height-900 {
     height: 900px;
   }
+
+.fixed-height-1200 {
+    height: 1300px;
+  }
+
+.min-height-900{
+  min-height: 900px;
+}
+
+.min-width-500{
+  min-width: 500px;
+}
