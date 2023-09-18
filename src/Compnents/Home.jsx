@@ -12,7 +12,7 @@ const Home = () => {
                     <h2 className='text-4xl font-bold sm:text-5xl'>
                         Resume Builder</h2>
                     <p className='text-2xl text-gray-700 font-bold mt-4'>Build your Resume in minutes.</p>
-                    <p className='text-xl text-gray-700 mt-2'>@riitu</p>
+    {/*<p className='text-xl text-gray-700 mt-2'>@riitu</p>*/}
                 
                 </div>
 

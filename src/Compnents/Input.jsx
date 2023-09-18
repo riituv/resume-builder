@@ -586,7 +586,7 @@ const Input = (props) => {
 
 
   return (
-    <div className='flex flex-col pd-4 md:mx-auto shadow-md shadow-gray-300 fixed-height-900 mb-10'>
+    <div className='flex flex-col pd-4 md:mx-auto shadow-md shadow-gray-300 mb-10'>
 
       <div className='flex lg:gap-10 md:gap-4 gap-5 md:flex-row flex-col p-10 border-b-2
        border-gray-300 text-xl font-semibold md:mx-auto'>
@@ -604,7 +604,7 @@ const Input = (props) => {
       <div className='p-10 flex flex-col gap-4 md:fixed-height-900'>
 
         <Control label="Title" placeholder="Enter section title"
-          value={secTitle}
+          value={secTitle || ''}
           onChange={(event) => setSecTitle(event.target.value)} />
 
 

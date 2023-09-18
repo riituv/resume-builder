@@ -1,6 +1,8 @@
 import React,{useEffect, useState} from 'react'
 import Input from './Input'
 import {BiSolidDownload} from 'react-icons/bi'
+import Resume from './Resume'
+
 const Heading = () => {
     // sections for input in the resume 
     const sections={
@@ -73,8 +75,12 @@ const Heading = () => {
                 </div>
                 
             </div>
+
+            //pass sections to the input component as props
             <Input sections={sections} information={resumeInfo}
             setInformation={setResumeInfo}/>
+
+            <Resume information={resumeInfo} sections={sections}/>
 
         </div>
     )
