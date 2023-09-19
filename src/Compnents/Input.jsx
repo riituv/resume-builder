@@ -11,22 +11,30 @@ const Input = (props) => {
   const [activeInfo, setActiveInfo] = useState(
     information[sections[Object.keys(sections)[0]]]
   );
+
+  //pre entered title in the resume
   const [secTitle, setSecTitle] = useState(
     sections[Object.keys(sections)[0]]
   );
-  const [values, setValues] = useState({
-    name: activeInfo?.details?.name || "",
-    email: activeInfo?.details?.email || "",
-    phone: activeInfo?.details?.phone || "",
-    linkedinLink: activeInfo?.details?.linkedin || "",
-    githubLink: activeInfo?.details?.github || "",
-    title: activeInfo?.details?.title || "",
-    summary: activeInfo?.details?.summary || "",
-    points: activeInfo?.details?.points || []
-  });
-  const [activeDetails, setActiveDetails] = useState(0);
-  //initially 0th index rahega
 
+  //default values
+  //first section basic info is always displayed so only those values
+  const [values, setValues] = useState({
+    name: activeInfo?.detail?.name || "",
+    email: activeInfo?.detail?.email || "",
+    phone: activeInfo?.detail?.phone || "",
+    linkedinLink: activeInfo?.detail?.linkedin || "",
+    githubLink: activeInfo?.detail?.github || "",
+    title: activeInfo?.detail?.title || "",
+    summary: activeInfo?.detail?.summary || "",
+    // points: activeInfo?.details?.points || []
+  });
+
+  //initially 0th index rahega
+  //for adding multiple entries in work exp or projects
+  const [activeDetails, setActiveDetails] = useState(0);
+
+  //update points fn
   const handlePointUpdate = (value, index) => {
     const tempValues = { ...values };
     if (!Array.isArray(tempValues.points)) tempValues.points = [];
@@ -34,11 +42,13 @@ const Input = (props) => {
     setValues(tempValues);
   };
 
-  const workExperience = (
+  //body for each section
+  //to generate the body for generate fn
+  const workExpBody = (
     <div>
       <div className='grid grid-cols-1 md:grid-cols-2  gap-6'>
         <Control label="Title"
-          placeholder="Enter title ed. Frontend developer"
+          placeholder="Enter title eg. Frontend developer"
           value={values.title}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, title: event.target.value }))} />
@@ -89,7 +99,7 @@ const Input = (props) => {
     </div>
   );
 
-  const projects = (
+  const projectBody = (
     <div>
 
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
@@ -110,14 +120,14 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Deployed Link"
           placeholder="Enter deployed link of project"
-          value={values.deployedLink}
+          value={values.link}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, deployedLink: event.target.value }))} />
+            setValues((prev) => ({ ...prev, linked: event.target.value }))} />
         <Control label="Github Link"
           placeholder="Enter github link of project"
-          value={values.githubLink}
+          value={values.github}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, githubLink: event.target.value }))} />
+            setValues((prev) => ({ ...prev, github: event.target.value }))} />
       </div>
 
       <div className='grid grid-cols-1 gap-4'>
@@ -136,7 +146,7 @@ const Input = (props) => {
     </div>
   );
 
-  const education = (
+  const eduBody = (
     <div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Title"
@@ -168,7 +178,7 @@ const Input = (props) => {
     </div>
   );
 
-  const basic = (
+  const basicBody = (
     <div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Name"
@@ -185,14 +195,14 @@ const Input = (props) => {
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="LinkedIn Link"
           placeholder="Enter your Linkedin profile link"
-          value={values.linkedinLink}
+          value={values.linkedin}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, linkedinLink: event.target.value }))} />
+            setValues((prev) => ({ ...prev, linkedin: event.target.value }))} />
         <Control label="Github Link"
           placeholder="Enter your GitHub profile link"
-          value={values.githubLink}
+          value={values.github}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, githubLink: event.target.value }))} />
+            setValues((prev) => ({ ...prev, github: event.target.value }))} />
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Email"
@@ -217,7 +227,7 @@ const Input = (props) => {
     </div>
   );
 
-  const others = (
+  const otherBody = (
     <div className='grid grid-cols-1 gap-4'>
       <Control placeholder="Line 1"
         value={values.points ? values.points[0] : ""}
@@ -231,11 +241,18 @@ const Input = (props) => {
     </div>
   );
 
-  const skills = (
+  const skillsBody = (
     <div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
-        <Control label="Skill"
-          placeholder="Enter skill"
+        <Control label="Title"
+          placeholder="Enter title eg. Technical Skills"
+          value={values.title}
+          onChange={(event) =>
+            setValues((prev) => ({ ...prev, title: event.target.value }))} />
+      </div>
+      <div className='grid grid-cols-1'>
+        <Control label="Skills"
+          placeholder="Enter skills"
           value={values.skill}
           onChange={(event) =>
             setValues((prev) => ({ ...prev, skill: event.target.value }))} />
@@ -243,7 +260,7 @@ const Input = (props) => {
     </div>
   );
 
-  const certifications = (
+  const certiBody = (
     <div>
       <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
         <Control label="Title"
@@ -280,54 +297,56 @@ const Input = (props) => {
             setValues((prev) => ({ ...prev, certificationLink: event.target.value }))} />
       </div>
     </div>
-
   );
 
+  //generate the body of each section
+  //display body of the active section
   const generateBody = () => {
     switch (sections[activeSec]) {
       case sections.basic:
-        return basic;
+        return basicBody;
 
       case sections.workExp:
-        return workExperience;
+        return workExpBody;
 
       case sections.edu:
-        return education;
+        return eduBody;
 
       case sections.project:
-        return projects;
+        return projectBody;
 
       case sections.skills:
-        return skills;
+        return skillsBody;
 
       case sections.certi:
-        return certifications;
+        return certiBody;
 
       case sections.other:
-        return others;
+        return otherBody;
 
       default:
         return null;
     }
   }
 
+  //update info when active section is updated
   useEffect(() => {
     const activeInfo = information[sections[activeSec]];
     setActiveInfo(activeInfo);
     setSecTitle(sections[activeSec]);
     setActiveDetails(0);
     setValues({
-      name: activeInfo?.details?.name || "",
-      email: activeInfo?.details?.email || "",
-      phone: activeInfo?.details?.phone || "",
-      linkedinLink: activeInfo?.details?.linkedin || "",
-      githubLink: activeInfo?.details
-        ? activeInfo?.details[0]?.githubLink || ""
-        : activeInfo?.details?.githubLink || "",
+      name: activeInfo?.detail?.name || "",
+      email: activeInfo?.detail?.email || "",
+      phone: activeInfo?.detail?.phone || "",
+      linkedin: activeInfo?.detail?.linkedin || "",
+      github: activeInfo?.details
+        ? activeInfo?.details[0]?.github || ""
+        : activeInfo?.detail?.github || "",
       title: activeInfo?.details
         ? activeInfo?.details[0]?.title || ""
-        : activeInfo?.details?.title || "",
-      summary: activeInfo?.details?.summary || "",
+        : activeInfo?.detail?.title || "",
+      summary: activeInfo?.detail?.summary || "",
 
       companyName: activeInfo?.details ? activeInfo?.details[0]?.companyName || "" : "",
       startDate: activeInfo?.details ? activeInfo?.details[0]?.startDate || "" : "",
@@ -338,7 +357,7 @@ const Input = (props) => {
       college: activeInfo?.details ? activeInfo?.details[0]?.college || "" : "",
 
       overview: activeInfo?.details ? activeInfo?.details[0]?.overview || "" : "",
-      deployedLink: activeInfo?.details ? activeInfo?.details[0]?.deployedLink || "" : "",
+      link: activeInfo?.details ? activeInfo?.details[0]?.link || "" : "",
 
       skill: activeInfo?.details ? activeInfo?.details[0]?.skill || "" : "",
 
@@ -351,9 +370,10 @@ const Input = (props) => {
           ? [...activeInfo.points]
           : "",
     });
-  }, [activeSec, information, sections]);
+  }, [activeSec]);
 
 
+  //save button
   const handleSubmission = () => {
     switch (sections[activeSec]) {
 
@@ -362,8 +382,8 @@ const Input = (props) => {
           const tempDetails = {
             name: values.name,
             title: values.title,
-            linkedinLink: values.linkedinLink,
-            githubLink: values.githubLink,
+            linkedin: values.linkedin,
+            github: values.github,
             email: values.email,
             phone: values.phone,
             summary: values.summary
@@ -373,7 +393,7 @@ const Input = (props) => {
             ...prev, [sections.basic]
               : {
               ...prev[sections.basic],
-              details: tempDetails,
+              detail: tempDetails,
               secTitle,
             }
           }));
@@ -437,8 +457,8 @@ const Input = (props) => {
           const tempDetails = {
             overview: values.overview,
             title: values.title,
-            deployedLink: values.deployedLink,
-            githubLink: values.githubLink,
+            link: values.link,
+            github: values.github,
             points: values.points,
           }
 
@@ -461,6 +481,7 @@ const Input = (props) => {
         {
           const tempDetails = {
             skill: values.skill,
+            title: values.title,
           }
 
           const tempDetail = [...information[sections.skills]?.details];
@@ -527,6 +548,7 @@ const Input = (props) => {
     }
   };
 
+  //add new project or work
   const handleAddNew = () => {
     const details = activeInfo?.details;
     if (!details) return;
@@ -537,13 +559,14 @@ const Input = (props) => {
     props.setInformation(prev => ({
       ...prev, [sections[activeSec]]
         : {
-          ...information[sections[activeSec]],
+        ...information[sections[activeSec]],
         details: details,
       },
     }));
     setActiveDetails(details?.length - 1);
   };
 
+  //delete existing entry
   const handleDeleteDetail = (index) => {
     const details = activeInfo?.details ? [...activeInfo?.details] : "";
     if (!details) return;
@@ -551,16 +574,17 @@ const Input = (props) => {
     props.setInformation(prev => ({
       ...prev, [sections[activeSec]]
         : {
-          ...information[sections[activeSec]],
+        ...information[sections[activeSec]],
         details: details,
       },
     }));
     setActiveDetails((prev) => (prev === index ? 0 : prev - 1));
   };
 
+  //update active info when info is updated
   useEffect(() => {
     setActiveInfo(information[sections[activeSec]]);
-  }, [information, activeSec, sections]);
+  }, [information]);
 
   useEffect(() => {
     const activeInfo = information[sections[activeSec]];
@@ -568,7 +592,7 @@ const Input = (props) => {
     if (!details) return;
 
     setValues({
-      githubLink: activeInfo.details[activeDetails]?.github || "",
+      github: activeInfo.details[activeDetails]?.github || "",
       title: activeInfo.details[activeDetails]?.title || "",
       points: activeInfo.details[activeDetails]?.points || [],
       companyName: activeInfo.details[activeDetails]?.companyName || "",
@@ -578,11 +602,11 @@ const Input = (props) => {
       location: activeInfo.details[activeDetails]?.location || "",
       college: activeInfo.details[activeDetails]?.college || "",
       overview: activeInfo.details[activeDetails]?.overview || "",
-      deployedLink: activeInfo.details[activeDetails]?.deployedLink || "",
+      link: activeInfo.details[activeDetails]?.deployedLink || "",
       skill: activeInfo.details[activeDetails]?.skill || "",
       issuingOrg: activeInfo.details[activeDetails]?.issuingOrg || "",
     });
-  }, [activeDetails, activeSec, information, sections]);
+  }, [activeDetails]);
 
 
   return (
@@ -604,7 +628,7 @@ const Input = (props) => {
       <div className='p-10 flex flex-col gap-4 md:fixed-height-900'>
 
         <Control label="Title" placeholder="Enter section title"
-          value={secTitle || ''}
+          value={secTitle}
           onChange={(event) => setSecTitle(event.target.value)} />
 
 

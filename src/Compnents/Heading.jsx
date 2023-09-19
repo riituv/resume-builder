@@ -15,12 +15,12 @@ const Heading = () => {
         other: "Other"
     };
 
-    // all resume information
+    // all resume information stored in this
     const[resumeInfo, setResumeInfo]=useState({
         [sections.basic]:{
             id:sections.basic,
             secTitle: sections.basic,
-            details:{},
+            detail:{},
         },
         [sections.workExp]:{
             id:sections.workExp,
@@ -40,7 +40,7 @@ const Heading = () => {
         [sections.skills]:{
             id:sections.skills,
             secTitle: sections.skills,
-            points:[],
+            details:[], 
         },
         [sections.certi]:{
             id:sections.certi,
@@ -76,7 +76,7 @@ const Heading = () => {
                 
             </div>
 
-            //pass sections to the input component as props
+            {/*pass sections to the input component as props*/}
             <Input sections={sections} information={resumeInfo}
             setInformation={setResumeInfo}/>
 
