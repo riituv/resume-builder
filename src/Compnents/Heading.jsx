@@ -1,11 +1,12 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import ReactToPrint from 'react-to-print';
 import Input from './Input'
-import {BiSolidDownload} from 'react-icons/bi'
+import { BiSolidDownload } from 'react-icons/bi'
 import Resume from './Resume'
 
 const Heading = () => {
     // sections for input in the resume 
-    const sections={
+    const sections = {
         basic: "Basic Info",
         workExp: "Work Experience",
         edu: "Education",
@@ -15,49 +16,51 @@ const Heading = () => {
         other: "Other"
     };
 
+    const resumeRef = useRef();
+
     // all resume information stored in this
-    const[resumeInfo, setResumeInfo]=useState({
-        [sections.basic]:{
-            id:sections.basic,
+    const [resumeInfo, setResumeInfo] = useState({
+        [sections.basic]: {
+            id: sections.basic,
             secTitle: sections.basic,
-            detail:{},
+            detail: {},
         },
-        [sections.workExp]:{
-            id:sections.workExp,
+        [sections.workExp]: {
+            id: sections.workExp,
             secTitle: sections.workExp,
-            details:[],
+            details: [],
         },
-        [sections.edu]:{
-            id:sections.edu,
+        [sections.edu]: {
+            id: sections.edu,
             secTitle: sections.edu,
-            details:[],
+            details: [],
         },
-        [sections.project]:{
-            id:sections.project,
+        [sections.project]: {
+            id: sections.project,
             secTitle: sections.project,
-            details:[],
+            details: [],
         },
-        [sections.skills]:{
-            id:sections.skills,
+        [sections.skills]: {
+            id: sections.skills,
             secTitle: sections.skills,
-            details:[], 
+            details: [],
         },
-        [sections.certi]:{
-            id:sections.certi,
+        [sections.certi]: {
+            id: sections.certi,
             secTitle: sections.certi,
-            details:[],
+            details: [],
         },
-        [sections.other]:{
-            id:sections.other,
+        [sections.other]: {
+            id: sections.other,
             secTitle: sections.other,
-            details:[],
+            details: [],
         }
     });
 
     useEffect(() => {
-      console.log(resumeInfo);
+        console.log(resumeInfo);
     }, [resumeInfo]);
-    
+
     return (
         <div className='flex flex-col mt-8 w-full 
         md:mt-10 p-4 mx-auto md:p-10 '>
@@ -67,20 +70,35 @@ const Heading = () => {
                     <h2 className='text-2xl font-bold'>Resume Builder</h2>
                 </div>
 
-                <div className='justify-center md:justify-end w-full flex '>
-                    <a download={true} className='bg-cyan-400 border p-2 border-gray-800 
+
+                <ReactToPrint
+                    trigger={() => {
+                        return (
+                            <div className='justify-center md:justify-end w-full flex '>
+                                <a download={true} className='bg-cyan-400 border p-2 border-gray-800 
                     rounded-lg h-10 w-30 font-bold cursor-pointer hover:scale-105 duration-200 
                     flex flex-row gap-2' href='riitu_resume_updated.pdf'>
-                        Download <BiSolidDownload size={20}/></a>
-                </div>
-                
+                                    Download <BiSolidDownload size={20} /></a>
+                            </div>
+                        );
+                    }}
+                    content={() => resumeRef.current}
+                />
+
             </div>
 
             {/*pass sections to the input component as props*/}
-            <Input sections={sections} information={resumeInfo}
-            setInformation={setResumeInfo}/>
+            <Input
+                sections={sections}
+                information={resumeInfo}
+                setInformation={setResumeInfo}
+            />
 
-            <Resume information={resumeInfo} sections={sections}/>
+            <Resume
+                ref={resumeRef}
+                information={resumeInfo}
+                sections={sections}
+            />
 
         </div>
     )

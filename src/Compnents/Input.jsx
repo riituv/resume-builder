@@ -27,7 +27,6 @@ const Input = (props) => {
     githubLink: activeInfo?.detail?.github || "",
     title: activeInfo?.detail?.title || "",
     summary: activeInfo?.detail?.summary || "",
-    // points: activeInfo?.details?.points || []
   });
 
   //initially 0th index rahega
@@ -122,7 +121,7 @@ const Input = (props) => {
           placeholder="Enter deployed link of project"
           value={values.link}
           onChange={(event) =>
-            setValues((prev) => ({ ...prev, linked: event.target.value }))} />
+            setValues((prev) => ({ ...prev, link: event.target.value }))} />
         <Control label="Github Link"
           placeholder="Enter github link of project"
           value={values.github}
@@ -586,6 +585,7 @@ const Input = (props) => {
     setActiveInfo(information[sections[activeSec]]);
   }, [information]);
 
+  //update data when new entry or chip is created
   useEffect(() => {
     const activeInfo = information[sections[activeSec]];
     const details = activeInfo?.details;
@@ -594,7 +594,7 @@ const Input = (props) => {
     setValues({
       github: activeInfo.details[activeDetails]?.github || "",
       title: activeInfo.details[activeDetails]?.title || "",
-      points: activeInfo.details[activeDetails]?.points || [],
+      points: activeInfo.details[activeDetails]?.points || "",
       companyName: activeInfo.details[activeDetails]?.companyName || "",
       startDate: activeInfo.details[activeDetails]?.startDate || "",
       endDate: activeInfo.details[activeDetails]?.endDate || "",
