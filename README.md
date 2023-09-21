@@ -3,8 +3,8 @@ The Resume Builder App is a web application built using React and Tailwind CSS t
 
 [Resume Builder](https://resumebuilder-tfuv.onrender.com/)
 
-![Project Image](public\project-image-1.png)
-![Project Image](public\project-image-2.png)
-![Project Image](public\project-image-3.png)
+![Project Image](https://github.com/riituv/resume-builder/blob/master/public/project-image-1.png)
+![Project Image](https://github.com/riituv/resume-builder/blob/master/public/project-image-2.png)
+![Project Image](https://github.com/riituv/resume-builder/blob/master/public/project-image-3.png)
 
 
