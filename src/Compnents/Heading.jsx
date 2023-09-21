@@ -75,10 +75,10 @@ const Heading = () => {
                     trigger={() => {
                         return (
                             <div className='justify-center md:justify-end w-full flex '>
-                                <a download={true} className='bg-cyan-400 border p-2 border-gray-800 
+                                <button download={true} className='bg-cyan-400 border p-2 border-gray-800 
                     rounded-lg h-10 w-30 font-bold cursor-pointer hover:scale-105 duration-200 
-                    flex flex-row gap-2' href='riitu_resume_updated.pdf'>
-                                    Download <BiSolidDownload size={20} /></a>
+                    flex flex-row gap-2'>
+                                    Download <BiSolidDownload size={20} /></button>
                             </div>
                         );
                     }}
